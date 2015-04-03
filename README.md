@@ -23,7 +23,7 @@ Tests](https://github.com/propensive/rapture-i18n-test)
 ## Availability
 
 Rapture I18N 1.2.0 is available under the *Apache 2.0 License* from Maven Central
-with group ID `com.propensive` and artifact ID `rapture-i18n_2.10`.
+with group ID `com.propensive` and artifact ID `rapture-i18n_2.11`.
 
 ### SBT
 
@@ -41,7 +41,7 @@ If you use Maven, include the following dependency:
 ```xml
 <dependency>
   <groupId>com.propensive</groupId>
-  <artifactId>rapture-i18n_2.10</artifactId>
+  <artifactId>rapture-i18n_2.11</artifactId>
   <version>1.2.0</version>
 </dependency>
 ```
