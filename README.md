@@ -1,9 +1,9 @@
+[![Build Status](https://travis-ci.org/propensive/rapture-i18n.png?branch=master)](https://travis-ci.org/propensive/rapture-i18n)
+
 # Rapture Internationalization (I18N)
 
 Rapture I18N is a very simple library for working with typesafe localized
-strings in Scala.
-
-Rapture I18N is part of the [Rapture](http://rapture.io/) project.
+strings in Scala. It is part of the [Rapture](http://rapture.io/) project.
 
 ## Features
 
@@ -14,6 +14,50 @@ Rapture I18N is part of the [Rapture](http://rapture.io/) project.
  - Internationalized strings may be treated as normal strings by specifying a
    default language
  - Convenient trait provided for writing 
+
+## Tests
+
+Tests for Rapture I18N are in their own project, [Rapture I18N
+Tests](https://github.com/propensive/rapture-i18n-test)
+
+## Availability
+
+Rapture I18N 1.2.0 is available under the *Apache 2.0 License* from Maven Central
+with group ID `com.propensive` and artifact ID `rapture-i18n_2.10`.
+
+### SBT
+
+You can include Rapture I18N as a dependency in your own project by adding the
+following library dependency to your build file:
+
+```scala
+libraryDependencies ++= Seq("com.propensive" %% "rapture-i18n" % "1.2.0")
+```
+
+### Maven
+
+If you use Maven, include the following dependency:
+
+```xml
+<dependency>
+  <groupId>com.propensive</groupId>
+  <artifactId>rapture-i18n_2.10</artifactId>
+  <version>1.2.0</version>
+</dependency>
+```
+
+### Building from source with SBT
+
+To build Rapture I18N from source, follow these steps:
+
+```
+git clone git@github.com:propensive/rapture-i18n.git
+cd rapture-i18n
+sbt package
+```
+
+If the compilation is successful, the compiled JAR file should be found in the
+directory for the appropriate Scala version in the `target` directory.
 
 ## Status
 
