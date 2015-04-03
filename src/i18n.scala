@@ -48,19 +48,10 @@ object I18nStringParam {
       override def apply[Lang >: L](implicit ct: ClassTag[Lang]) = s
     })
   
-  implicit def toI18nStringParam[T, L <: Language](t: T)(implicit is: I18nStringable[L, T]): I18nStringParam[L] =
-    I18nStringParam(is.make(t))
+  implicit def toI18nStringParam[L <: Language](s: I18nString[L]): I18nStringParam[L] =
+    I18nStringParam(s)
 }
 case class I18nStringParam[+L <: Language](i18nString: I18nString[L]) extends AnyVal
-
-trait I18nStringable[+L <: Language, T] { def make(t: T): I18nString[L] }
-
-object I18nStringable {
-  implicit def i18nStringI18nStringable[L <: Language]: I18nStringable[L, I18nString[L]] =
-    new I18nStringable[L, I18nString[L]] {
-      def make(t: I18nString[L]): I18nString[L] = t
-    }
-}
 
 trait LanguageBundle[Langs <: Language] {
   type IString = I18nString[Langs]
