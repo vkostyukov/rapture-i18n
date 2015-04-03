@@ -28,8 +28,10 @@ class I18nString[+Langs <: Language](private val map: Map[ClassTag[_], String]) 
 
   override def toString = {
     val langs = map.keys.map(_.runtimeClass.getName.split("\\.").last.toLowerCase).mkString("|")
-    val content = "\""+map.get(implicitly[ClassTag[En]]).orElse(map.headOption.map(_._1)).getOrElse("")+"\""
-    s"$langs:$content"
+    val content: Option[String] = map.get(implicitly[ClassTag[En]])
+    lazy val first: Option[String] = map.headOption.flatMap { case (k, v) => map.get(k) }
+    val str = "\""+content.orElse(first).getOrElse("")+"\""
+    s"$langs:$str"
   }
 
   override def hashCode = map.hashCode ^ 248327829
