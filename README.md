@@ -133,6 +133,22 @@ compile time. Beware, though, of methods like `+` on `String` which simply call
 `toString` on the operand, and consequently do not enforce the typesafe
 conversion to the correct language string. These methods should be avoided.
 
+## Standard methods
 
+The `toString` method on `I18nString`s is implemented such that it should
+quickly be obvious that the string is an internationalized, rather than an
+ordinary, string. For a given internationalized string, `toString` will display
+two-letter codes for all the languages it provides, followed by the contents of
+the string in English, if available, or in some other language, if not.
 
+For example,
+
+```
+scala> fr"Bonjour" | en"Hello"
+res: I18nString[Fr with En] = fr|en:"Hello"
+```
+
+Additionally `hashCode` and `equals` are implemented such that `I18nString`s
+can be usefully compared. Internationalized strings are treated as sets, so
+reorderings are not significant.
 
