@@ -13,7 +13,6 @@
 package rapture.i18n
 
 import scala.reflect.ClassTag
-
 import language.implicitConversions
 
 object I18nString {
@@ -21,9 +20,11 @@ object I18nString {
     i18nString.map(implicitly[DefaultLanguage[L2]].tag)
 }
 
+trait DistinctTypes[-L1, L2]
+
 class I18nString[+Langs <: Language](private val map: Map[ClassTag[_], String]) {
   def apply[Lang >: Langs](implicit ct: ClassTag[Lang]): String = map(ct)
-  def |[Lang2 <: Language](s2: I18nString[Lang2]): I18nString[Langs with Lang2] =
+  def |[Lang2 <: Language](s2: I18nString[Lang2])(implicit ev: DistinctTypes[Langs, Lang2]): I18nString[Langs with Lang2] =
     new I18nString[Langs with Lang2](map ++ s2.map)
 
   override def toString = {

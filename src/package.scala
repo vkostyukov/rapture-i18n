@@ -14,7 +14,11 @@ package rapture.i18n
 
 import scala.reflect.ClassTag
 
-object `package` {
+trait package_1 {
+  implicit def distinct[T, U]: DistinctTypes[T, U] = null
+}
+
+object `package` extends package_1 {
 
   private def context[L <: Language: ClassTag](sc: StringContext, params: List[I18nStringParam[L]]): I18nString[L] =
     new I18nString[L](Map(implicitly[ClassTag[L]] -> sc.parts.zip(params.map(_.i18nString.apply[L]) :+ "").map { case (a, b) => a+b }.mkString))
@@ -26,5 +30,9 @@ object `package` {
     def it(params: I18nStringParam[It]*): I18nString[It] = context[It](sc, params.toList)
     def es(params: I18nStringParam[Es]*): I18nString[Es] = context[Es](sc, params.toList)
   }
+
+  implicit def ambiguous1[T, U >: T]: DistinctTypes[T, U] = null
+  implicit def ambiguous2[T, U >: T]: DistinctTypes[T, U] = null
+
 }
 
