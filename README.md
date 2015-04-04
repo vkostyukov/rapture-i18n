@@ -80,7 +80,7 @@ conversation.
 
 First of all, import the following:
 
-```
+```scala
 import rapture.i18n._
 ```
 
@@ -91,7 +91,7 @@ English and French strings, respectively.
 More importantly, you can define a single value representing an
 internationalized string using the alternation operator (`|`), like this:
 
-```
+```scala
 val greeting = en"Hello" | fr"Bonjour" | de"Guten Tag"
 ```
 
@@ -110,19 +110,19 @@ our choice, simply by applying it as a type parameter to the identifier, e.g.
 Types for internationalized strings behave such that a value may overspecify
 language strings for a given type, for example
 
-```
+```scala
 val msgs: I18nString[En with Fr] = fr"Bonjour" | en"Hello" | de"Guten Tag"
 ```
 
 but may not underspecify language strings, so this is not valid:
 
-```
+```scala
 val msgs: I18nString[En with Fr] = en"Hello" | de"Guten Tag"
 ```
 
 and will result in a compile error.
 
-```
+```scala
 error: type mismatch;
  found   : rapture.i18n.I18nString[rapture.i18n.De]
  required: rapture.i18n.I18nString[rapture.i18n.Fr]
@@ -140,33 +140,33 @@ strings. In the latter case, the internationalized string must provide the
 language of the internationalized string it is being substituted into, for
 example this is valid:
 
-```
+```scala
 val greeting = en"Hello" | fr"Bonjour"
 en"In England we greet people with '$greeting'."
 ```
 
 but not this,
 
-```
+```scala
 val greeting = en"Hello" | fr"Bonjour"
 de"In Deutschland sagen wir '$greeting'"
 ```
 
 which is another compile error.
 
-## Default langauges
+## Default languages
 
 It is often useful to pick a single language for use within some scope, and use
 internationalized strings as if they are ordinary `String`s. This is achievable
 by importing a default language, e.g.
 
-```
+```scala
 import languages.es._
 ```
 
 An internationalized string may then be used in place of an ordinary `String`, like so:
 
-```
+```scala
 import languages.de._
 val errorMsg = en"Oh no!" | de"Ach nein!"
 throw new Exception(errorMsg)
@@ -189,7 +189,7 @@ the string in English, if available, or in some other language, if not.
 
 For example,
 
-```
+```scala
 scala> fr"Bonjour" | en"Hello"
 res: I18nString[Fr with En] = fr|en:"Hello"
 ```
